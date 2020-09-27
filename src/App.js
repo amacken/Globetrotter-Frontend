@@ -10,13 +10,79 @@ import LogOut from "./components/LogOut/LogOut";
 import './App.css';
 
 function App() {
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+    isLoggedIn: false
+  });
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [isLoggedIn]);
+
+  const handleLogOut = () => {};
+
+  const handleInput = (event) => {
+    setState({ ...state, [event.target.name]: event.target.value });
+  };
+
+  const handleSignUp = (event) => {};
+
+  const handleLogIn = (event) => {};
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Hello World</p>
-      </header>
+      <NavBar isLoggedIn={isLoggedIn} />
+      <div className="body">
+        <Switch>
+          <Route
+            path="/signup"
+            render={(props) => {
+              return (
+                <SignUpForm
+                  isLoggedIn={isLoggedIn}
+                  handleInput={handleInput}
+                  handleSignUp={handleSignUp}
+                />
+              );
+            }}
+          />
+          <Route
+            path="/logout"
+            render={(props) => {
+              return (
+                <LogOut isLoggedIn={isLoggedIn} handleLogOut={handleLogOut} />
+              );
+            }} 
+          />
+          <Route
+            path="/login"
+            render={(props) => {
+              return (
+                <LogInForm
+                  isLoggedIn={isLoggedIn}
+                  handleInput={handleInput}
+                  handleLogIn={handleLogIn} 
+                />
+              );
+            }} 
+          />
+          <Route
+            path="/"
+            render={() => {
+              return <List isLoggedIn={isLoggedIn} />;
+            }} 
+          />
+        </Switch>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
