@@ -9,7 +9,9 @@ import LogInForm from "./components/LogInForm/LogInForm";
 import LogOut from "./components/LogOut/LogOut";
 import './App.css';
 
-function App() {
+require("dotenv").config();
+
+export default function App() {
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -84,5 +86,3 @@ function App() {
     </div>
   );
 };
-
-export default App;
