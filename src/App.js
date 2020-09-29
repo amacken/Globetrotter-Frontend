@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 // import axios from "axios";
 
-// import NavBar from "./components/NavBar/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 import CityList from "./components/CityList/CityList";
 import SignUpForm from "./components/SignUpForm/SignUpForm";
 import LogInForm from "./components/LogInForm/LogInForm";
@@ -41,7 +41,7 @@ export default function App() {
 
   return (
     <div className="App">
-      {/* <NavBar isLoggedIn={isLoggedIn} /> */}
+      <NavBar isLoggedIn={isLoggedIn} />
       <Map/>
       <div className="body">
         <Router>
