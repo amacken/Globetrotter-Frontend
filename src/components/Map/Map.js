@@ -3,7 +3,6 @@ import GoogleMapReact from "google-map-react";
 
 export default function Map({ cityLocation, zoomLevel }) {
     const KEY = process.env.REACT_APP_KEY;
-    console.log(KEY)
 
     return (
         <div className="map">
