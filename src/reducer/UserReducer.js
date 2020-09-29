@@ -1,0 +1,32 @@
+const UserReducer = (state, action) => {
+    switch (action.type) {
+      case "SET_ID":
+        return {
+          ...state,
+          id: action.payload,
+        };
+  
+      case "SET_NAME":
+        return {
+          ...state,
+          name: action.payload,
+        };
+  
+      case "SET_EMAIL":
+        return {
+          ...state,
+          email: action.payload,
+        };
+  
+      case "SET_LOGGEDIN":
+        return {
+          ...state,
+          loggedIn: action.payload,
+        };
+  
+      default:
+        return state;
+    }
+  };
+  
+  export default UserReducer;

@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 
 import NavBar from "./components/NavBar/NavBar";
 import CityList from "./components/CityList/CityList";
 import SignUpForm from "./components/SignUpForm/SignUpForm";
 import LogInForm from "./components/LogInForm/LogInForm";
 import LogOut from "./components/LogOut/LogOut";
+import {UserContext} from "../src/context/Context"
 import Map from "./components/Map/Map";
 import './App.css';
 
 require("dotenv").config();
 
-export default function App() {
+export default function App(props) {
+  // const [userState, dispatchUserState] = useContext(UserContext);
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -35,9 +37,58 @@ export default function App() {
     setState({ ...state, [event.target.name]: event.target.value });
   };
 
-  const handleSignUp = (event) => {};
+  const [signupInfo, updateSignupInfo] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
 
-  const handleLogIn = (event) => {};
+  const [loginInfo, updateLoginInfo] = useState({
+    email: "",
+    password: ""
+  });
+
+  const handleLoginChange = (event) => {
+    updateLoginInfo({ ...loginInfo, [event.target.name]: event.target.value });
+  };
+
+  const handleSignupChange = (event) => {
+    updateSignupInfo({
+      ...signupInfo,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(`http://localhost:3000/users/signup`, {
+        name: signupInfo.name,
+        email: signupInfo.email,
+        password: signupInfo.password
+      });
+      localStorage.token = response.data.token;
+      // console.log(response, userState);
+      props.history.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLogIn = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(`http://localhost:3000/users/login`, {
+        email: loginInfo.email,
+        password: loginInfo.password
+      });
+      localStorage.token = response.data.token;
+      // console.log(response, userState);
+      props.history.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="App">
