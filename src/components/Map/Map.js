@@ -3,6 +3,7 @@ import GoogleMapReact from "google-map-react";
 
 export default function Map({ cityLocation, zoomLevel }) {
     const KEY = process.env.REACT_APP_KEY;
+    console.log(KEY)
 
     return (
         <div className="map">
@@ -14,7 +15,7 @@ export default function Map({ cityLocation, zoomLevel }) {
                     defaultZoom={zoomLevel}
                     controlSize="400px"
                 >
-                    
+
                 </GoogleMapReact>
             </div>
         </div>

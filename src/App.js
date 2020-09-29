@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from "react-router-dom";
-import axios from "axios";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+// import axios from "axios";
 
-import NavBar from "./components/NavBar/NavBar";
+// import NavBar from "./components/NavBar/NavBar";
 import CityList from "./components/CityList/CityList";
 import SignUpForm from "./components/SignUpForm/SignUpForm";
 import LogInForm from "./components/LogInForm/LogInForm";
@@ -41,48 +41,51 @@ export default function App() {
 
   return (
     <div className="App">
-      <NavBar isLoggedIn={isLoggedIn} />
+      {/* <NavBar isLoggedIn={isLoggedIn} /> */}
+      <Map/>
       <div className="body">
-        <Switch>
-          <Route
-            path="/signup"
-            render={(props) => {
-              return (
-                <SignUpForm
-                  isLoggedIn={isLoggedIn}
-                  handleInput={handleInput}
-                  handleSignUp={handleSignUp}
-                />
-              );
-            }}
-          />
-          <Route
-            path="/logout"
-            render={(props) => {
-              return (
-                <LogOut isLoggedIn={isLoggedIn} handleLogOut={handleLogOut} />
-              );
-            }} 
-          />
-          <Route
-            path="/login"
-            render={(props) => {
-              return (
-                <LogInForm
-                  isLoggedIn={isLoggedIn}
-                  handleInput={handleInput}
-                  handleLogIn={handleLogIn} 
-                />
-              );
-            }} 
-          />
-          <Route
-            path="/"
-            render={() => {
-              return <CityList isLoggedIn={isLoggedIn} />;
-            }} 
-          />
-        </Switch>
+        <Router>
+          <Switch>
+            <Route
+              path="/signup"
+              render={(props) => {
+                return (
+                  <SignUpForm
+                    isLoggedIn={isLoggedIn}
+                    handleInput={handleInput}
+                    handleSignUp={handleSignUp}
+                  />
+                );
+              }}
+            />
+            <Route
+              path="/logout"
+              render={(props) => {
+                return (
+                  <LogOut isLoggedIn={isLoggedIn} handleLogOut={handleLogOut} />
+                );
+              }} 
+            />
+            <Route
+              path="/login"
+              render={(props) => {
+                return (
+                  <LogInForm
+                    isLoggedIn={isLoggedIn}
+                    handleInput={handleInput}
+                    handleLogIn={handleLogIn} 
+                  />
+                );
+              }} 
+            />
+            <Route
+              path="/"
+              render={() => {
+                return <CityList isLoggedIn={isLoggedIn} />;
+              }} 
+            />
+          </Switch>
+        </Router>
       </div>
     </div>
   );
